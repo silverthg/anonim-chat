@@ -63,3 +63,68 @@
     max-width: 100%;
   }
 }
+/* Стили для контейнера */
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Стили для заголовка */
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Стили для описания */
+.description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Стили для main-content */
+.main-content {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Стили для формы публикации */
+.post-form {
+  margin-bottom: 20px;
+}
+
+.post-form textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.post-form button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Стили для постов */
+.post {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.post-text {
+  font-size: 16px;
+}
+
+.post-timestamp {
+  font-size: 12px;
+  color: #777;
+}
