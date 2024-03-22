@@ -1,0 +1,37 @@
+/* Стили для контейнера */
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Стили для заголовка */
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Стили для описания */
+  p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  /* Стили для формы авторизации */
+  .auth-form {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  /* Стили для заголовков формы */
+  .auth-form h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  /* Стили для полей ввода */
+  .auth-form input {
+    width: 100%;
+    padding: 10px;
+  }
