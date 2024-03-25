@@ -1,109 +1,166 @@
 const registerForm = document.getElementById('register-form');
 const loginForm = document.getElementById('login-form');
 const postsContainer = document.getElementById('posts-container');
-const postText = document.getElementById('post-text');
+const postTitle = document.getElementById('post-title');
+const postContent = document.getElementById('post-content');
 const submitPost = document.getElementById('submit-post');
 
-registerForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+  const registerForm = document.getElementById('register-form');
+  if (registerForm) {
+    registerForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
 
-  const formData = new FormData(registerForm);
-  const username = formData.get('username');
-  const password = formData.get('password');
+      const formData = new FormData(registerForm);
+      const username = formData.get('username');
+      const password = formData.get('password');
 
-  const response = await fetch('http://localhost:3000/api/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-  });
+      // Проверка на пустые поля
+      if (!username || !password) {
+        alert('Все поля должны быть заполнены!');
+        return;
+      }
 
-  if (response.ok) {
-    // Пользователь успешно зарегистрирован
-    // Перенаправить на страницу ленты
-    window.location.href = 'main_page.html';
-    console.log('Регистрация прошла успешно'); // Вывод успешного сообщения
-  } else {
-    // Ошибка регистрации
-    // Обработать ошибку
-    console.error('Ошибка регистрации:', response.statusText);
+      try {
+        const response = await fetch('http://localhost:3000/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        });
+
+        if (response.ok) {
+          // Пользователь успешно зарегистрирован
+          // Перенаправить на страницу ленты
+          window.location.href = 'main_page.html';
+          console.log('Регистрация прошла успешно'); // Вывод успешного сообщения
+        } else if (response.status === 409) {
+          // Если пользователь с таким именем уже существует
+          // Вывести сообщение на сайте с предложением авторизоваться
+          alert('Пользователь с таким именем уже существует. Пожалуйста, авторизуйтесь.');
+        } else {
+          // Обработать другие ошибки регистрации
+          console.error('Ошибка регистрации:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Ошибка при отправке запроса:', error);
+      }
+    });
   }
-});
 
-loginForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
 
-  const formData = new FormData(loginForm);
-  const username = formData.get('username');
-  const password = formData.get('password');
+      const formData = new FormData(loginForm);
+      const username = formData.get('username');
+      const password = formData.get('password');
 
-  const response = await fetch('http://localhost:3000/api/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-  });
+      // Проверка на пустые поля
+      if (!username || !password) {
+        alert('Все поля должны быть заполнены!');
+        return;
+      }
 
-  if (response.ok) {
-    // Пользователь успешно авторизовался
-    // Перенаправить на страницу ленты
-    window.location.href = 'main_page.html';
-    console.log('Авторизация прошла успешно'); // Вывод успешного сообщения
-  } else {
-    // Ошибка авторизации
-    // Обработать ошибку
-    console.error('Ошибка авторизации:', response.statusText);
+      try {
+        const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        });
+
+        if (response.ok) {
+          const jwt = await response.text();
+          // Установка токена в локальное хранилище
+          localStorage.setItem('accessToken', jwt);
+          console.log('Авторизация прошла успешно'); // Вывод успешного сообщения
+          // Пользователь успешно авторизовался
+          // Перенаправить на страницу ленты
+          console.log('Пытаюсь перенаправить на main_page.html');
+          window.location.href = 'main_page.html';
+        } else {
+          // Ошибка авторизации
+          // Обработать ошибку
+          console.error('Ошибка авторизации:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Ошибка при отправке запроса:', error);
+      }
+    });
   }
 });
 
 // Main Page //
-submitPost.addEventListener('click', async () => {
-  const text = postText.value;
-  const response = await fetch('/api/posts', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ text }),
-  });
 
-  if (response.ok) {
-    // Пост успешно создан
-    // Очистить поле ввода
-    postText.value = '';
-    // Обновить ленту
-    getPosts();
-  } else {
-    // Ошибка при создании поста
-    // Обработать ошибку
-    console.error('Ошибка при создании поста:', response.statusText);
-  }
+// Обработчик отправки поста
+document.addEventListener('DOMContentLoaded', () => {
+  const submitPost = document.getElementById('submit-post');
+  const postTitle = document.getElementById('post-title');
+  const postContent = document.getElementById('post-content');
+
+  submitPost.addEventListener('click', async () => {
+    const title = postTitle.value; // Получаем значение заголовка
+    const content = postContent.value; // Получаем текст поста
+
+    try {
+      const response = await fetch('http://localhost:3000/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+        body: JSON.stringify({ title, content }), // Отправляем и название, и текст
+      });
+
+      if (response.ok) {
+        // Пост успешно создан
+        postTitle.value = ''; // Очищаем поля ввода
+        postContent.value = '';
+        getPosts(); // Обновляем ленту
+      } else {
+        // Обрабатываем ошибку создания поста
+        console.error('Ошибка при создании поста:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Ошибка при отправке запроса:', error);
+    }
+  });
 });
 
+
+// Функция для получения и отображения постов
 async function getPosts() {
-  const response = await fetch('/api/posts');
-  const posts = await response.json();
+  try {
+    const response = await fetch('http://localhost:3000/posts', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
 
-  postsContainer.innerHTML = '';
-
-  for (const post of posts) {
-    const postElement = document.createElement('div');
-    postElement.classList.add('post');
-    postElement.innerHTML = `
-      <p class="post-text">${post.text}</p>
-      <p class="post-timestamp">${post.timestamp}</p>
-    `;
-
-    postsContainer.appendChild(postElement);
+    if (response.ok) {
+      const posts = await response.json();
+      const postsContainer = document.getElementById('posts-container');
+      postsContainer.innerHTML = ''; // Очищаем контейнер перед добавлением новых постов
+      for (const post of posts) {
+        const postElement = document.createElement('div');
+        postElement.classList.add('post');
+        postElement.innerHTML = `
+          <h2 class="post-title">${post.title}</h2>
+          <p class="post-content">${post.content}</p>
+          `;
+          postsContainer.appendChild(postElement);
+        }
+      } else {
+        // Обрабатываем ошибку получения постов
+        console.error('Ошибка при получении постов:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Ошибка при отправке запроса:', error);
+    }
   }
-}
-
-getPosts();
+  
+  getPosts(); // Вызов функции при загрузке страницы
