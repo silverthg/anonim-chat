@@ -12,4 +12,4 @@ ENV JWT_SECRET="secretKey"
 
 EXPOSE 3054
 
-CMD ["node", "index.js"]
+CMD ["node", "server.js"]
