@@ -7,7 +7,7 @@ RUN npm install
 
 COPY . /backend
 
-ENV MONGO_DB_URL="mongodb://mongo:3055/"
+ENV MONGO_DB_URL="mongodb://mongo:27017/"
 ENV JWT_SECRET="secretKey"
 
 EXPOSE 3054
