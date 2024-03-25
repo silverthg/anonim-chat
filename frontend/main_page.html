@@ -12,10 +12,13 @@
     <p class="description">Анонимная лента для твоих мыслей</p>
     <div class="main-content">
       <div class="post-form">
-        <textarea id="post-text" placeholder="Введите текст публикации"></textarea>
+        <input type="text" id="post-title" placeholder="Введите название записи">
+        <textarea id="post-content" placeholder="Введите текст публикации"></textarea>
         <button id="submit-post">Отправить</button>
+      </div>      
+      <div id="posts-container" class="posts-list">
+        <!-- Контейнер для постов с классом для стилизации -->
       </div>
-      <div id="posts-container"></div>
     </div>
   </div>
   <script src="script.js"></script>
