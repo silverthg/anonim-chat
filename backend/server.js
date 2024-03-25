@@ -1,11 +1,28 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+
+mongoose.connect("mongodb://localhost:27017/", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const postSchema = new mongoose.Schema({
+  title: String,
+  content: String,
+});
+
+const Post = mongoose.model("Post", postSchema);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
@@ -21,7 +38,8 @@ app.post("/login", (req, res) => {
   }
 });
 
-app.get("/posts", authenticateToken, (req, res) => {
+app.get("/posts", authenticateToken, async (req, res) => {
+  const posts = await Post.find();
   res.json(posts);
 });
 
@@ -37,10 +55,10 @@ app.post("/register", (req, res) => {
   res.json(newUser);
 });
 
-app.post("/posts", authenticateToken, (req, res) => {
+app.post("/posts", authenticateToken, async (req, res) => {
   const { title, content } = req.body;
-  const newPost = { id: posts.length + 1, title, content };
-  posts.push(newPost);
+  const newPost = new Post({ title, content });
+  await newPost.save();
   res.json(newPost);
 });
 

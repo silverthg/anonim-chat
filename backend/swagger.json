@@ -1,0 +1,27 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Anonim-chat-API"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Получить список пользователей",
+        "responses": {
+          "200": {
+            "description": "Успешный запрос"
+          }
+        }
+      },
+      "post": {
+        "summary": "Создать пользователя",
+        "responses": {
+          "201": {
+            "description": "Пользователь создан"
+          }
+        }
+      }
+    }
+  }
+}
