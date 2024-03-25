@@ -9,15 +9,8 @@ const swaggerDocument = require("./swagger.json");
 const app = express();
 const port = 3054;
 
+app.use(cors());
 app.use(bodyParser.json());
-
-app.use(
-  cors({
-    origin: "http://localhost:3054/",
-    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-    credentials: true,
-  })
-);
 
 mongoose.connect("mongodb://localhost:3055/mydb", {
   useNewUrlParser: true,
