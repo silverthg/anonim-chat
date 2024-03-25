@@ -4,10 +4,49 @@
     "version": "1.0.0",
     "title": "Anonim-chat-API"
   },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": ["http"],
   "paths": {
-    "/users": {
+    "/login": {
+      "post": {
+        "summary": "Авторизация пользователя",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешная авторизация"
+          },
+          "401": {
+            "description": "Неправильное имя пользователя или пароль"
+          }
+        }
+      }
+    },
+    "/posts": {
       "get": {
-        "summary": "Получить список пользователей",
+        "summary": "Получить все записи",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Успешный запрос"
@@ -15,13 +54,74 @@
         }
       },
       "post": {
-        "summary": "Создать пользователя",
+        "summary": "Создать запись",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "201": {
-            "description": "Пользователь создан"
+          "200": {
+            "description": "Запись создана"
           }
         }
       }
+    },
+    "/register": {
+      "post": {
+        "summary": "Регистрация нового пользователя",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пользователь зарегистрирован"
+          },
+          "400": {
+            "description": "Пользователь уже существует"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }
