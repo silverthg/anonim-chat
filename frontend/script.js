@@ -96,6 +96,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Main Page //
 
+document.addEventListener("DOMContentLoaded", function() {
+  var postsContainer = document.getElementById("posts-container");
+
+  // Массив объектов постов с названиями и текстами
+  var posts = [
+      { title: "Пост 1", content: "Текст 1" },
+      { title: "Пост 2", content: "Текст 2" },
+      { title: "Пост 3", content: "Текст 3" },
+      // Добавьте сколько угодно постов
+  ];
+
+  // Создание и добавление постов в контейнер
+  posts.forEach(function(post) {
+      var postElement = document.createElement("div");
+      postElement.classList.add("post");
+      postElement.innerHTML = "<h2>" + post.title + "</h2><p>" + post.content + "</p>";
+      postsContainer.appendChild(postElement);
+  });
+});
+
 // Обработчик отправки поста
 document.addEventListener('DOMContentLoaded', () => {
   const submitPost = document.getElementById('submit-post');
