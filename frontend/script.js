@@ -96,6 +96,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Main Page //
 
+
+// Функция для добавления нового поста в localStorage и обновления отображения
+function addPost(title, content) {
+  const posts = JSON.parse(localStorage.getItem('posts') || '[]'); // Получаем текущие посты или инициализируем пустым массивом
+  posts.push({ title, content }); // Добавляем новый пост
+  localStorage.setItem('posts', JSON.stringify(posts)); // Обновляем localStorage
+  getPosts(); // Обновляем отображение постов
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
   var postsContainer = document.getElementById("posts-container");
 
@@ -118,69 +128,73 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Обработчик отправки поста
 document.addEventListener('DOMContentLoaded', () => {
-  const submitPost = document.getElementById('submit-post');
-  const postTitle = document.getElementById('post-title');
-  const postContent = document.getElementById('post-content');
+  getPosts(); // Вызываем при загрузке страницы для отображения существующих постов
 
-  submitPost.addEventListener('click', async () => {
-    const title = postTitle.value; // Получаем значение заголовка
-    const content = postContent.value; // Получаем текст поста
+  const submitPostButton = document.getElementById('submit-post');
 
-    try {
-      const response = await fetch('http://localhost:3000/posts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        body: JSON.stringify({ title, content }), // Отправляем и название, и текст
-      });
-
-      if (response.ok) {
-        // Пост успешно создан
-        postTitle.value = ''; // Очищаем поля ввода
-        postContent.value = '';
-        getPosts(); // Обновляем ленту
-      } else {
-        // Обрабатываем ошибку создания поста
-        console.error('Ошибка при создании поста:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Ошибка при отправке запроса:', error);
+  submitPostButton.addEventListener('click', () => {
+    const title = document.getElementById('post-title').value; // Считываем заголовок поста
+    const content = document.getElementById('post-content').value; // Считываем содержание поста
+    if (!title.trim() || !content.trim()) {
+      alert('Заголовок и содержание поста не должны быть пустыми!');
+      return;
     }
+    addPost(title, content); // Добавляем пост и обновляем ленту
+    // Очищаем поля ввода после добавления поста
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-content').value = '';
   });
 });
 
 
 // Функция для получения и отображения постов
 async function getPosts() {
-  try {
-    const response = await fetch('http://localhost:3000/posts', {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    });
+  // Получаем посты или инициализируем пустым массивом
+  const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+  const postsContainer = document.getElementById('posts-container');
+  postsContainer.innerHTML = ''; // Очищаем контейнер перед добавлением новых постов
 
-    if (response.ok) {
-      const posts = await response.json();
-      const postsContainer = document.getElementById('posts-container');
-      postsContainer.innerHTML = ''; // Очищаем контейнер перед добавлением новых постов
-      for (const post of posts) {
-        const postElement = document.createElement('div');
-        postElement.classList.add('post');
-        postElement.innerHTML = `
-          <h2 class="post-title">${post.title}</h2>
-          <p class="post-content">${post.content}</p>
-          `;
-          postsContainer.appendChild(postElement);
-        }
-      } else {
-        // Обрабатываем ошибку получения постов
-        console.error('Ошибка при получении постов:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Ошибка при отправке запроса:', error);
-    }
+  for (const post of posts) {
+    const postElement = document.createElement('div');
+    postElement.classList.add('post');
+    postElement.innerHTML = `
+      <h2 class="post-title">${post.title}</h2>
+      <p class="post-content">${post.content}</p>
+    `;
+    postsContainer.appendChild(postElement);
   }
+}
+
+// async function getPosts() {
+//   try {
+//     const response = await fetch('http://localhost:3000/posts', {
+//       headers: {
+//         'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+//       },
+//     });
+
+//     if (response.ok) {
+//       // const posts = await response.json();
+//       // const postsContainer = document.getElementById('posts-container');
+//       const posts = JSON.parse(localStorage.getItem('posts') || '[]'); // Получаем посты или инициализируем пустым массивом
+//       const postsContainer = document.getElementById('posts-container');
+//       postsContainer.innerHTML = ''; // Очищаем контейнер перед добавлением новых постов
+//       for (const post of posts) {
+//         const postElement = document.createElement('div');
+//         postElement.classList.add('post');
+//         postElement.innerHTML = `
+//           <h2 class="post-title">${post.title}</h2>
+//           <p class="post-content">${post.content}</p>
+//           `;
+//           postsContainer.appendChild(postElement);
+//         }
+//       } else {
+//         // Обрабатываем ошибку получения постов
+//         console.error('Ошибка при получении постов:', response.statusText);
+//       }
+//     } catch (error) {
+//       console.error('Ошибка при отправке запроса:', error);
+//     }
+//   }
   
   getPosts(); // Вызов функции при загрузке страницы
