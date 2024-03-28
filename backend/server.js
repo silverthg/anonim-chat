@@ -9,15 +9,7 @@ const swaggerDocument = require("./swagger.json");
 const app = express();
 const port = 3054;
 
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors());
 
 app.use(bodyParser.json());
 
@@ -80,11 +72,19 @@ app.post("/register", async (req, res) => {
   res.json(newUser);
 });
 
+app.post("/logout", authenticateToken, async (req, res) => {
+  localStorage.removeItem("accessToken");
+
+  res.json({ message: "Вы успешно вышли из системы" });
+});
+
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
-  if (token == null) {
+  if (token == null && req.url === "/logout") {
+    next();
+  } else if (token == null) {
     return res.sendStatus(401);
   }
 
