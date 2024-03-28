@@ -21,7 +21,7 @@ app.use(
 
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/mydb", {
+mongoose.connect(process.env.MONGO_DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
