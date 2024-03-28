@@ -59,6 +59,13 @@ app.get("/posts", authenticateToken, async (req, res) => {
   res.json(posts);
 });
 
+app.post("/posts", authenticateToken, async (req, res) => {
+  const { title, content } = req.body;
+  const newPost = new Post({ title, content });
+  await newPost.save();
+  res.json(newPost);
+});
+
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
 
