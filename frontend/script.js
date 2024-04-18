@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch('http://185.250.46.244:3054/register', {
+        const response = await fetch('http://localhost:3000/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch('http://185.250.46.244:3054/login', {
+        const response = await fetch('http://localhost:3000/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Main Page //
 function addPost(title, content) {
-  fetch('http://185.250.46.244:3054/posts', {
+  fetch('http://localhost:3000/posts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   submitPostButton.addEventListener('click', async () => { // Добавлен async
     const title = document.getElementById('post-title').value;
-    const content = document.getElementById('post-content').value;
+    const content = document.getElementById('posts-content').value;
     if (!title.trim() || !content.trim()) {
       alert('Заголовок и содержание поста не должны быть пустыми!');
       return;
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       await addPost(title, content); // Используем await для ожидания завершения запроса
       document.getElementById('post-title').value = '';
-      document.getElementById('post-content').value = '';
+      document.getElementById('posts-content').value = '';
       // Добавьте здесь пользовательское уведомление об успешном добавлении поста, если нужно
     } catch (error) {
       alert('Произошла ошибка при добавлении поста. Пожалуйста, попробуйте снова.');
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Функция для получения и отображения постов
 async function getPosts() {
   try {
-    const response = await fetch('http://185.250.46.244:3054/posts', {
+    const response = await fetch('http://localhost:3000/posts', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
       }
@@ -176,7 +176,7 @@ async function getPosts() {
         <h2 class="post-title">${post.title}</h2>
         <p class="post-content">${post.content}</p>
       `;
-      postsContainer.appendChild(postElement);
+      postsContainer.prepend(postElement);
     });
   } catch (error) {
     console.error('Ошибка:', error);
