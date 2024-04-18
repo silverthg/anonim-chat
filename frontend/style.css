@@ -1,4 +1,4 @@
-/* Стили для контейнера */
+/*Стили для контейнера
 .container {
   max-width: 960px;
   margin: 0 auto;
@@ -8,7 +8,7 @@
   margin-bottom: 20px;
 }
 
-/* Стили для заголовка */
+
 .title {
   font-size: 24px;
   margin-bottom: 10px;
@@ -16,7 +16,7 @@
   text-align: center;
 }
 
-/* Стили для описания */
+
 .description {
   font-size: 16px;
   margin-bottom: 20px;
@@ -24,7 +24,7 @@
   line-height: 1.5;
 }
 
-/* Стили для формы авторизации */
+
 .auth-form {
   border: 1px solid #ddd;
   padding: 20px;
@@ -33,14 +33,13 @@
   margin: 0 auto;
 }
 
-/* Стили для заголовков формы */
 .auth-form h2 {
   font-size: 20px;
   margin-bottom: 10px;
   color: #333;
 }
 
-/* Стили для полей ввода */
+
 .auth-form input {
   width: 100%;
   padding: 10px;
@@ -50,7 +49,7 @@
   border-radius: 5px;
 }
 
-/* Стили для кнопки */
+
 .auth-form button {
   width: 100%;
   padding: 10px;
@@ -71,33 +70,33 @@
   cursor: pointer;
   margin-top: 10px;
 }
-/* Медиазапросы */
+
 @media (max-width: 768px) {
   .container {
     max-width: 100%;
   }
 }
 
-/* Стили для контейнера */
+
 .container {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Стили для заголовка */
+
 h1 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-/* Стили для описания */
+
 .description {
   font-size: 16px;
   margin-bottom: 20px;
 }
 
-/* Стили для main-content */
+
 .main-content {
   border: 1px solid #ddd;
   padding: 20px;
@@ -105,7 +104,7 @@ h1 {
   max-width: 960px;
 }
 
-/* Стили для формы публикации */
+
 .post-form {
   margin: 0 auto;
   margin-bottom: 20px;
@@ -128,22 +127,22 @@ h1 {
   color: #fff;
   cursor: pointer;
 }
-/* Основные стили */
+
 
 .posts-list {
-  max-height: 400px; /* Примерная высота, которую вы можете настроить */
-  overflow-y: auto; /* Включает прокрутку если контент превышает высоту */
-  border-top: 1px solid #ccc; /* Линия для визуального разделения, если нужно */
+  max-height: 400px; 
+  overflow-y: auto; 
+  border-top: 1px solid #ccc; 
 }
 
-/* Стили для постов */
+
 .post {
   border: 1px solid #ddd;
   padding: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
   margin: 0 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Пример тени */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .post-text {
@@ -153,4 +152,90 @@ h1 {
 .post-timestamp {
   font-size: 12px;
   color: #777;
+}
+*/
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+.description {
+  color: #666;
+  text-align: center;
+}
+
+.post-form {
+  margin-bottom: 20px;
+}
+
+.post-form input[type="text"],
+.post-form textarea {
+  width: calc(100% - 20px); /* Учитываем ширину полей и отступы */
+  padding: 10px; /* Задаем отступы внутри полей */
+  margin-bottom: 10px; /* Отступ снизу */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 0; /* Убираем правый отступ */
+  margin-left: 0; /* Убираем левый отступ */
+  resize: none;
+}
+
+.post-form button {
+  width: calc(100% - 20px); /* Учитываем ширину кнопки и отступы */
+  padding: 10px; /* Задаем отступы внутри кнопки */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px; /* Отступ справа */
+  margin-left: 10px; /* Отступ слева */
+}
+
+
+.post-form button:hover {
+  background-color: #0056b3;
+}
+
+.posts-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.post-content {
+  color: #666;
 }
