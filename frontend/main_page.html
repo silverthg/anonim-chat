@@ -7,20 +7,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>AnonFeed</h1>
-    <p class="description">Анонимная лента для твоих мыслей</p>
-    <div class="main-content">
+  <!-- Контейнер формы отправки поста -->
+  <div class="post-form-container">
+    <div class="container">
+      <h1>AnonFeed</h1>
+      <p class="description">Анонимная лента для твоих мыслей</p>
       <div class="post-form">
         <input type="text" id="post-title" placeholder="Введите название записи">
         <textarea id="post-content" placeholder="Введите текст публикации"></textarea>
         <button id="submit-post">Отправить</button>
-      </div>      
+      </div>
+    </div>
+  </div>
+
+  <!-- Контейнер для постов -->
+  <div class="posts-container">
+    <div class="container">
       <div id="posts-container" class="posts-list">
         <!-- Контейнер для постов с классом для стилизации -->
       </div>
     </div>
   </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
