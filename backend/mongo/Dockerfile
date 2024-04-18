@@ -1,5 +1,3 @@
-FROM ubuntu:latest
-
 FROM mongo
 
 RUN mkdir -p /data/db

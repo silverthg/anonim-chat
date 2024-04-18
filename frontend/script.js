@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/register', {
+        const response = await fetch('http://185.250.46.244:3054/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.ok) {
           // Пользователь успешно зарегистрирован
           // Перенаправить на страницу ленты
-          window.location.href = 'main_page.html';
+          window.location.href = 'login.html';
           // После успешной авторизации
           const text = await response.text();
           const data = JSON.parse(text);
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://185.250.46.244:3054/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Main Page //
 function addPost(title, content) {
-  fetch('http://localhost:3000/posts', {
+  fetch('http://185.250.46.244:3054/posts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Функция для получения и отображения постов
 async function getPosts() {
   try {
-    const response = await fetch('http://localhost:3000/posts', {
+    const response = await fetch('http://185.250.46.244:3054/posts', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
       }

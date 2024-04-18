@@ -9,19 +9,11 @@ const swaggerDocument = require("./swagger.json");
 const app = express();
 const port = 3054;
 
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors());
 
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/mydb", {
+mongoose.connect(process.env.MONGO_DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -59,6 +51,13 @@ app.get("/posts", authenticateToken, async (req, res) => {
   res.json(posts);
 });
 
+app.post("/posts", authenticateToken, async (req, res) => {
+  const { title, content } = req.body;
+  const newPost = new Post({ title, content });
+  await newPost.save();
+  res.json(newPost);
+});
+
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
 
@@ -73,11 +72,19 @@ app.post("/register", async (req, res) => {
   res.json(newUser);
 });
 
+app.post("/logout", authenticateToken, async (req, res) => {
+  localStorage.removeItem("accessToken");
+
+  res.json({ message: "Вы успешно вышли из системы" });
+});
+
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
-  if (token == null) {
+  if (token == null && req.url === "/logout") {
+    next();
+  } else if (token == null) {
     return res.sendStatus(401);
   }
 

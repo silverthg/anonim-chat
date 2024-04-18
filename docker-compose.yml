@@ -1,0 +1,21 @@
+services:
+  mongo:
+    container_name: mongo
+    build:
+      context: ./backend/mongo
+      dockerfile: Dockerfile
+    restart: always
+    hostname: mongo
+    image: mongo
+    volumes:
+      - mongodb_me:/data/db
+    ports:
+      - "3055:27017"
+  server:
+    build: backend/
+    ports:
+      - "3054:3054"
+    links:
+      - mongo
+volumes:
+  mongodb_me:

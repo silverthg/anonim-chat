@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "title": "Anonim-chat-API"
   },
-  "host": "localhost:3054",
+  "host": "185.250.46.244:3054",
   "basePath": "/",
   "schemes": ["http"],
   "paths": {
