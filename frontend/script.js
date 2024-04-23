@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/register', {
+        const response = await fetch('http://mivt22.kit-imi.info:3054/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://mivt22.kit-imi.info:3054/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Main Page //
 function addPost(title, content) {
-  fetch('http://localhost:3000/posts', {
+  fetch('http://mivt22.kit-imi.info:3054/posts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Функция для получения и отображения постов
 async function getPosts() {
   try {
-    const response = await fetch('http://localhost:3000/posts', {
+    const response = await fetch('http://mivt22.kit-imi.info:3054/posts', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
       }
