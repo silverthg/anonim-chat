@@ -17,5 +17,11 @@ services:
       - "3054:3054"
     links:
       - mongo
+  client:
+    build: frontend/
+    ports:
+      - "3056:3056"
+    depends_on:
+      - server
 volumes:
   mongodb_me:
