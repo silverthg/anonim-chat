@@ -1,4 +1,3 @@
-GNU nano 6.2                                                                  Dockerfile
 # inherit from an existing image to add the functionality
 FROM node:20-alpine
 
