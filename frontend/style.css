@@ -3,31 +3,33 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #361134;
+  background-color: #ddf9e9;
 }
 
 .center-container {
   width: 100%;
 }
+
 .index-container {
   border-radius: 20px;
+  border: 2px solid #DCDCDC;
   max-width: 500px;
-  margin: 0 auto; /* Для центрирования контейнера по горизонтали */
+  margin: 0 auto;
   padding: 20px;
   font-family: 'Roboto', sans-serif;
-  background-color: #f7f7f7;
+  background-color: #FFFAFA;
 }
 
 .container {
   border-radius: 20px;
   max-width: 1000px;
-  margin: 0 auto; /* Для центрирования контейнера по горизонтали */
+  margin: 0 auto;
   padding: 20px;
   font-family: 'Roboto', sans-serif;
-  background-color: #f7f7f7;
+  background-color: #FFFAFA;
+  border: 2px solid #DCDCDC;
 }
 
-/* Стили для заголовка */
 .title {
   font-size: 24px;
   margin-bottom: 10px;
@@ -35,15 +37,13 @@
   text-align: center;
 }
 
-/* Стили для описания */
 .description {
   font-size: 16px;
   margin-bottom: 20px;
-  color: #777;
+  color: #393d3f;
   line-height: 1.5;
 }
 
-/* Стили для формы авторизации */
 .auth-form {
   border: 1px solid #ddd;
   padding: 20px;
@@ -52,70 +52,49 @@
   margin: 0 auto;
 }
 
-/* Стили для заголовков формы */
 .auth-form h2 {
   font-size: 20px;
   margin-bottom: 10px;
   color: #333;
 }
 
-/* Стили для полей ввода */
 .auth-form input {
   width: 95%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-bottom: 10px;
-  border-radius: 5px;
 }
 
-/* Стили для кнопки */
-.auth-form button {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #e56b70;
-  color: #fff;
-  cursor: pointer;
-  margin-top: 10px;
-}
 .button {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #e56b70;
+  background-color: #393d3f;
   color: #fff;
   cursor: pointer;
   margin-top: 10px;
 }
-/* Медиазапросы */
+
 @media (max-width: 768px) {
   .container {
     max-width: 100%;
   }
 }
 
-/* Стили для заголовка */
-.main-h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #393d3f;
-}
 h1 {
   font-size: 24px;
   margin-bottom: 10px;
-  color: #e56b70;
+  color: #393d3f;
 }
+
 .description{
-  color: #000;
+  color: #393d3f;
   font-size: 16px;
   margin-bottom: 20px;
 }
-.main-description{
-  color: #393d3f;
-}
+
 .body-main{
   background-color: #ddf9e9;
 }
@@ -130,7 +109,7 @@ h1 {
 .main-container {
   border-radius: 20px;
   max-width: 800px;
-  margin: 0 auto; /* Для центрирования контейнера по горизонтали */
+  margin: 0 auto;
   padding: 20px;
   font-family: 'Roboto', sans-serif;
 }
@@ -138,7 +117,7 @@ h1 {
 .posts-container {
   border-radius: 20px;
   max-width: fit-content;
-  margin: 0 auto; /* Для центрирования контейнера по горизонтали */
+  margin: 0 auto; 
   padding: 20px;
   font-family: 'Roboto', sans-serif;
   background-color: #fdfdfd;
@@ -152,23 +131,24 @@ h1 {
 }
 
 .post-form input[type="text"]{
-  width: calc(100% - 20px); /* Учитываем ширину полей и отступы */
-  padding: 10px; /* Задаем отступы внутри полей */
-  margin-bottom: 10px; /* Отступ снизу */
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 0; /* Убираем правый отступ */
-  margin-left: 0; /* Убираем левый отступ */
+  margin-right: 0;
+  margin-left: 0;
   resize: none;
 }
+
 .post-form textarea {
-  width: calc(100% - 20px); /* Учитываем ширину полей и отступы */
-  padding: 10px; /* Задаем отступы внутри полей */
-  margin-bottom: 10px; /* Отступ снизу */
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 0; /* Убираем правый отступ */
-  margin-left: 0; /* Убираем левый отступ */
+  margin-right: 0;
+  margin-left: 0;
   resize: none;
   height: 300px;
 }
@@ -198,7 +178,7 @@ h1 {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: auto; 
-  max-height: 500px; /* Установите максимальную высоту поста */
+  max-height: 500px;
 }
 
 .post-title {

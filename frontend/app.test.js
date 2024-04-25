@@ -5,7 +5,7 @@ import { expect } from 'chai';
 async function authenticateUser() {
   try {
     const authResponse = await axios.post('http://mivt22.kit-imi.info:3054/login', {
-      username: 'a@mail.ru', // Замените на фактическое имя пользователя
+      username: 'arsen.vasiliev.2000@mail.ru', // Замените на фактическое имя пользователя
       password: '123123123'  // Замените на фактический пароль
     }, {
       headers: {
@@ -25,7 +25,6 @@ async function authenticateUser() {
 
 describe("GET: /api/posts", function() {
   let token;
-
   before(async function() {
     this.timeout(10000); // Установка большего таймаута для аутентификации
     token = await authenticateUser(); // Получение токена перед тестами
