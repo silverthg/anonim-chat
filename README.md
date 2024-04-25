@@ -9,3 +9,6 @@ https://www.figma.com/file/cTdrpPWlps2qK8sUAKJMTe/Anonim-Feed?type=design&mode=d
 # Правила коммитов
 1. Язык описания коммитов: английский
 2. По описанию должно быть понятно, что было сделано
+# Адреса
+Backend IP: http://185.250.46.244:3054/api-docs/
+Frontend IP: http://185.250.46.244:3056/
